@@ -1,0 +1,27 @@
+
+
+{% include "header.html" %}
+<br>
+<br>
+{% load crispy_forms_tags %}
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1 class="mt-2">Basic Form</h1>
+        <hr class="mt-0 mb-4">
+        {% block content %}
+        <form method="POST" enctype="multipart/form-data">
+          <!-- Security token -->
+          {% csrf_token %}
+          <!-- Using the formset -->
+          {{ form|crispy}}
+          <button type="submit" class="btn btn-success">Save person</button>
+        </form>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  {% include "footer.html" %}

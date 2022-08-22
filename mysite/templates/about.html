@@ -1,0 +1,28 @@
+    {% include "header.html" %}
+    <style>
+        #data{
+            height: 570px;
+        }
+    </style>
+<div id="data">
+    <br>
+    <br>
+    <br>
+    <br>
+    <br>
+
+    <body>
+        {% load crispy_forms_tags %}
+        {% block content %}
+        <form method="post" novalidate>
+          {% csrf_token %}
+          {{ form|crispy }}
+          <br>
+          <button type="submit" class="btn btn-success">Save person</button>
+        </form>
+      {% endblock %}
+</body>
+</div>
+{% include "footer.html" %}
+
+

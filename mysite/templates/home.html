@@ -3,7 +3,7 @@
     {% include "header.html" %}
 <style>
     #test{
-     background: url("http://127.0.0.1:8000/static/images/1_xMuIOwjliGUPjkzukeWKfw.jpeg") 50% 0 no-repeat fixed;
+     background: url("/static/images/1_xMuIOwjliGUPjkzukeWKfw.jpeg") 50% 0 no-repeat fixed;
      height: 570px;
      padding: 100px 0 0 0;   
      }
@@ -11,17 +11,6 @@
 <div id="test">
 
 </div>
-    <!-- <body>
-        {% block body_block %}
-<form action = "" method = "post" id="test">
-    {% csrf_token %}
-    {{static}}
-    {{form }}<br>
-    <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-
-{% endblock %}
-</body> -->
 {% include "footer.html" %}
 </html>
 
