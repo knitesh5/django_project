@@ -1,0 +1,44 @@
+
+
+{% include "header.html" %}
+<br>
+<br>
+{% load crispy_forms_tags %}
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1 class="mt-2">Basic Form</h1>
+        <hr class="mt-0 mb-4">
+        {% block content %}
+        <form method="POST" action="updaterecord/{{ mymember.emp_id }}">
+            {% csrf_token %}
+            <div class="form-group">
+              <label for="formGroupExampleInput">Emp id</label>
+              <input value="{{ mymember.emp_id }}" type="text" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">Name</label>
+              <input value="{{ mymember.name }}" type="text" class="form-control" name='Name'>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Email</label>
+                <input value="{{ mymember.email }}" type="text" class="form-control" name='Email'>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Job title</label>
+                <input value="{{ mymember.job_title }}" type="text" class="form-control" name='Job_title'>
+            </div>
+            <div class="form-group">
+                <label for="formGroupExampleInput2">Bio</label>
+                <input value="{{ mymember.bio }}" type="text" class="form-control" name='Bio'>
+            </div>
+            <button type="submit" class="btn btn-success">Save person</button>
+          </form>
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  {% include "footer.html" %}

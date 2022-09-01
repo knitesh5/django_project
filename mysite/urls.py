@@ -21,7 +21,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('test/', views.test),
     path('mock/', views.mock),
-    path('fruits/', views.create_view,name='homepage'),
+    path('emp_details/', views.create_view,name='homepage'),
+    path('list_view/', views.list_view,name='homepage'),
+    path('list_view/delete/<int:emp_id>', views.delete, name='delete'),
+    path('list_view/edit/<int:emp_id>', views.edit, name='edit'),
+    path('list_view/edit/updaterecord/<int:emp_id>', views.updaterecord, name='updaterecord'),
     path('about/', views.about),
     path('', views.home_view),
 ]

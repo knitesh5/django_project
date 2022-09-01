@@ -1,0 +1,46 @@
+
+
+{% include "header.html" %}
+<br>
+<br>
+{% load crispy_forms_tags %}
+
+
+
+<div class="container">
+    <div class="row justify-content-center">
+      <div class="col-8">
+        <h1 class="mt-2">List Details</h1>
+        <hr class="mt-0 mb-4">
+        {% block content %}
+        <table class="table table-striped">
+            <thead>
+              <tr>
+                <th scope="col">Id</th>
+                <th scope="col">Name</th>
+                <th scope="col">Email</th>
+                <th scope="col">Job Title</th>
+                <th scope="col">Bio</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+                {% for data in dataset %}
+              <tr>
+                <td>{{data.emp_id}}</td>
+                <td>{{data.name}}</td>
+                <td>{{data.email}}</td>
+                <td>{{data.job_title}}</td>
+                <td>{{data.bio}}</td>
+                <td><a class='fa fa-trash' style='color: red' href="delete/{{ data.emp_id }}"></a></td>
+                <td><a class='fa fa-edit' style='color: green' href="edit/{{ data.emp_id }}"></a></td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+  {% include "footer.html" %}

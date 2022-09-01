@@ -1,5 +1,6 @@
 
 from django import forms
+from django.forms import HiddenInput
  
 # creating a form
 class InputForm(forms.Form):
@@ -16,5 +17,5 @@ from .models import Person
 class PersonForm(forms.ModelForm):
     class Meta:
         model = Person
-        fields = ('name', 'email', 'job_title', 'bio')
+        fields = ('emp_id','name', 'email', 'job_title', 'bio')
 
