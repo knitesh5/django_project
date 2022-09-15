@@ -21,6 +21,7 @@
                 <th scope="col">Email</th>
                 <th scope="col">Job Title</th>
                 <th scope="col">Bio</th>
+                <th scope="col">File Name</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -32,6 +33,7 @@
                 <td>{{data.email}}</td>
                 <td>{{data.job_title}}</td>
                 <td>{{data.bio}}</td>
+                <td>{{data.file}}</td>
                 <td><a class='fa fa-trash' style='color: red' href="delete/{{ data.emp_id }}"></a></td>
                 <td><a class='fa fa-edit' style='color: green' href="edit/{{ data.emp_id }}"></a></td>
               </tr>

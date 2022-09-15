@@ -5,4 +5,5 @@ class Person(models.Model):
     name = models.CharField(max_length=130)
     email = models.EmailField(blank=True)
     job_title = models.CharField(max_length=30, blank=True)
-    bio = models.TextField(blank=True)
+    bio = models.TextField(blank=True)  
+    file = models.FileField(blank=True) # for creating file input  

@@ -17,7 +17,7 @@
             {% csrf_token %}
             <div class="form-group">
               <label for="formGroupExampleInput">Emp id</label>
-              <input value="{{ mymember.emp_id }}" type="text" class="form-control">
+              <input value="{{ mymember.emp_id }}" type="text" class="form-control" name='Emp_id'>
             </div>
             <div class="form-group">
               <label for="formGroupExampleInput2">Name</label>
@@ -35,6 +35,10 @@
                 <label for="formGroupExampleInput2">Bio</label>
                 <input value="{{ mymember.bio }}" type="text" class="form-control" name='Bio'>
             </div>
+            <div class="form-group">
+              <label for="formGroupExampleInput2">File Name:</label>
+              <input value="{{ mymember.file }}" type="file" class="form-control" name='File'>
+          </div>
             <button type="submit" class="btn btn-success">Save person</button>
           </form>
         {% endblock %}

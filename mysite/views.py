@@ -11,6 +11,11 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
+from mysite.functions.functions import handle_uploaded_file
+from .forms import NewUserForm
+from django.contrib.auth import login,authenticate
+from django.contrib import messages
+from django.contrib.auth.forms import AuthenticationForm #add this
 
 
 def test(request):
@@ -40,14 +45,14 @@ def create_view(request):
     # field names as keys
     context ={}
     # add the dictionary during initialization
-    form = PersonForm(request.POST or None)
+    form = PersonForm(request.POST,request.FILES or None)
     if form.is_valid():
+        handle_uploaded_file(request.FILES['file'])
         form.save()
         context["dataset"] = Person.objects.all()
         return redirect("/list_view")
        
     context['form']= form
-    # return HttpResponseRedirect("list_view.html")
     return render(request, "person_form.html", context)
 
 
@@ -77,15 +82,51 @@ def edit(request, emp_id):
     return HttpResponse(template.render(context, request))
 
 def updaterecord(request, emp_id):
+    # emp_id = request.POST['Emp_id']
     name = request.POST['Name']
     email = request.POST['Email']
     job_title = request.POST['Job_title']
     bio = request.POST['Bio']
+    file = request.POST['File']
     member = Person.objects.get(emp_id=emp_id)
     member.emp_id = emp_id
     member.name = name
     member.email = email
     member.job_title = job_title
     member.bio = bio
+    member.file = file
     member.save()
     return redirect("/list_view")
+
+
+
+def register_request(request):
+    if request.method == "POST":
+        form = NewUserForm(request.POST)
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(request, "Registration successful.Please Login" )
+            return redirect("/login")
+        messages.error(request, "Unsuccessful registration. Invalid information.")
+    form = NewUserForm()
+    return render (request=request, template_name="register.html", context={"register_form":form})
+
+
+def login_request(request):
+    if request.method == "POST":
+        form = AuthenticationForm(request, data=request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get('username')
+            password = form.cleaned_data.get('password')
+            user = authenticate(username=username, password=password)
+            if user is not None:
+                login(request, user)
+                messages.info(request, f"You are now logged in as {username}.")
+                return redirect("/")
+            else:
+                messages.error(request,"Invalid username or password.")
+        else:
+            messages.error(request,"Invalid username or password.")
+    form = AuthenticationForm()
+    return render(request=request, template_name="login.html", context={"login_form":form})

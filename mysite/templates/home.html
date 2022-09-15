@@ -8,8 +8,11 @@
      padding: 100px 0 0 0;   
      }
 </style>
-<div id="test">
 
+<div id="test">
+{% for message in messages %}
+<div class="alert alert-info msg fade show" role="alert">{{ message }}</div>
+{% endfor %}
 </div>
 {% include "footer.html" %}
 </html>
