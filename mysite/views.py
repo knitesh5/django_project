@@ -16,6 +16,10 @@ from .forms import NewUserForm
 from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm #add this
+from django.contrib.auth import logout
+from django.conf import settings
+from django.core.mail import send_mail
+
 
 
 def test(request):
@@ -106,6 +110,11 @@ def register_request(request):
         if form.is_valid():
             user = form.save()
             login(request, user)
+            subject = 'welcome to GFG world'
+            message = f'Hi {user.username}, thank you for registering Nitesh website.'
+            email_from = settings.EMAIL_HOST_USER
+            recipient_list = [user.email, ]
+            send_mail( subject, message, email_from, recipient_list )
             messages.success(request, "Registration successful.Please Login" )
             return redirect("/login")
         messages.error(request, "Unsuccessful registration. Invalid information.")
@@ -123,10 +132,15 @@ def login_request(request):
             if user is not None:
                 login(request, user)
                 messages.info(request, f"You are now logged in as {username}.")
-                return redirect("/")
+                return redirect("/",user)
             else:
                 messages.error(request,"Invalid username or password.")
         else:
             messages.error(request,"Invalid username or password.")
     form = AuthenticationForm()
     return render(request=request, template_name="login.html", context={"login_form":form})
+
+def logout_view(request):
+    logout(request)
+    messages.info(request, f"You are now logged out.")
+    return redirect("/")

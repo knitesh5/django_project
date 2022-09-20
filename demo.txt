@@ -1,6 +1,11 @@
-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
+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
 
 sqlite3 db.sqlite3 //to connect the db
 .tables
 DROP TABLE mysite_person;
 DELETE * FROM table_name
+
+For mail 
+beacuse of seanse 30 may 2022, they permanently OFF the secure option from email account
+
+for that we Before generating the APP password your google account must enable the 2FA. If the 2FA is enabled then you can hop on to the security section in the manage accounts and there you can see the APP password section.

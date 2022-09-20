@@ -26,8 +26,9 @@ urlpatterns = [
     path('list_view/delete/<int:emp_id>', views.delete, name='delete'),
     path('list_view/edit/<int:emp_id>', views.edit, name='edit'),
     path('list_view/edit/updaterecord/<int:emp_id>', views.updaterecord, name='updaterecord'),
-    path("register", views.register_request, name="register"),
-    path("login", views.login_request, name="login"),
+    path("register/", views.register_request, name="register"),
+    path("login/", views.login_request, name="login"),
+    path("logout/", views.logout_view, name="logout"),
     path('about/', views.about),
     path('', views.home_view),
 ]
