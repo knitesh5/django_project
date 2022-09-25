@@ -12,13 +12,17 @@ from django.shortcuts import redirect
 from django.template import loader
 from django.http import HttpResponse, HttpResponseRedirect
 from mysite.functions.functions import handle_uploaded_file
-from .forms import NewUserForm
+from .forms import NewUserForm,UploadFileForm
 from django.contrib.auth import login,authenticate
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm #add this
 from django.contrib.auth import logout
 from django.conf import settings
 from django.core.mail import send_mail
+import django_excel as excel
+
+import pandas as pd
+
 
 
 
@@ -144,3 +148,18 @@ def logout_view(request):
     logout(request)
     messages.info(request, f"You are now logged out.")
     return redirect("/")
+
+
+def upload(request):
+    if request.method == "POST":
+        form = UploadFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            filehandle = request.FILES['file']
+            print("filehandle",filehandle)
+            df = pd.read_excel(filehandle)
+            print("df",df)
+            html = df.to_html()
+            return render(request,'upload.html', {'html': html})
+    else:
+        form = UploadFileForm()
+    return render(request,'upload.html',{'form': form})
