@@ -4,7 +4,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .forms import InputForm
 from django.views.generic import UpdateView
-from .models import Person
+from .models import Person,UploadFile
 from .forms import PersonForm
 from django.views.generic import CreateView
 from django.http import HttpResponseRedirect
@@ -20,6 +20,8 @@ from django.contrib.auth import logout
 from django.conf import settings
 from django.core.mail import send_mail
 import django_excel as excel
+from django.core.files.storage import FileSystemStorage
+import datetime as dt
 
 import pandas as pd
 
@@ -154,11 +156,17 @@ def upload(request):
     if request.method == "POST":
         form = UploadFileForm(request.POST, request.FILES)
         if form.is_valid():
-            filehandle = request.FILES['file']
-            print("filehandle",filehandle)
-            df = pd.read_excel(filehandle)
-            print("df",df)
-            html = df.to_html()
+            myfile = request.FILES['file']        
+            fs = FileSystemStorage()
+            filename = fs.save(myfile.name, myfile) 
+            empexceldata = pd.read_excel(myfile)
+            dbframe = empexceldata
+            for dbframe in dbframe.itertuples():
+                 
+                fromdate_time_obj = dt.datetime.strptime(dbframe.dob, '%d-%m-%Y')
+                obj = UploadFile(emp_id=dbframe.emp_id,name=dbframe.name, subject=dbframe.subject,dob=fromdate_time_obj)
+                obj.save()
+            html = empexceldata.to_html()
             return render(request,'upload.html', {'html': html})
     else:
         form = UploadFileForm()

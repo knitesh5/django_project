@@ -1,4 +1,4 @@
-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
+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
 
 sqlite3 db.sqlite3 //to connect the db
 .tables
@@ -9,3 +9,31 @@ For mail
 beacuse of seanse 30 may 2022, they permanently OFF the secure option from email account
 
 for that we Before generating the APP password your google account must enable the 2FA. If the 2FA is enabled then you can hop on to the security section in the manage accounts and there you can see the APP password section.
+
+CREATE TABLE mysite_person (
+	emp_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+	email TEXT NOT NULL,
+	job_title TEXT NOT NULL,
+	bio TEXT NOT NULL
+);
+
+INSERT INTO Person (id,name,email,job_title,bio)
+VALUES (1,'nit', 'n@gmail.com', 'data', 'hey');
+
+
+CREATE TABLE Person (
+	emp_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+	email TEXT NOT NULL,
+	job_title TEXT NOT NULL,
+	bio TEXT NOT NULL UNIQUE
+);
+
+CREATE TABLE mysite_uploadfile(
+    emp_id TEXT PRIMARY KEY,
+    name TEXT NOT NULL,
+	subject TEXT NOT NULL,
+    dob TEXT NOT NULL
+)
+
