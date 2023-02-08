@@ -37,3 +37,19 @@ CREATE TABLE mysite_uploadfile(
     dob TEXT NOT NULL
 )
 
+docker build .
+docker-compose up
+docker-compose up --build
+
+
+
+ngnix
+gunicone
+apace http
+aws
+
+https://www.youtube.com/watch?v=tnJBalPzeAo
+
+python manage.py makemigrations
+python manage.py migrate
+

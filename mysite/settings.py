@@ -22,11 +22,13 @@ SETTINGS_PATH = os.path.normpath(os.path.dirname(__file__))
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-#d4ck)x)jx8ep$00=&x9b3lg*%+0-6q=2llfa_g3e4fu3qa=tw'
+# SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+# DEBUG = True
+DEBUG = os.getenv('DEBUG')
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -149,7 +151,8 @@ EMAIL_PORT = 587
 EMAIL_HOST_USER = 'infotech555999@gmail.com'
 EMAIL_HOST_PASSWORD = 'lxbykukgwyjqlwbb'
 
-# STATIC_URL = '/static/'
+STATIC_ROOT = '/static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
